@@ -61,7 +61,6 @@ class MockMetalsClient:
         return [
             {'metal': 'Gold', 'price': 2150.50, 'currency': 'USD', 'change_24h': 15.25},
             {'metal': 'Silver', 'price': 28.30, 'currency': 'USD', 'change_24h': -0.50},
-            {'metal': 'Copper', 'price': 4.25, 'currency': 'USD', 'change_24h': 0.10},
-            {'metal': 'Aluminum', 'price': 2750.00, 'currency': 'USD', 'change_24h': -5.00},
-            {'metal': 'Zinc', 'price': 2650.00, 'currency': 'USD', 'change_24h': 20.00},
+            {'metal': 'Platinum', 'price': 950.75, 'currency': 'USD', 'change_24h': 8.20},
+            {'metal': 'Palladium', 'price': 920.40, 'currency': 'USD', 'change_24h': -12.30},
         ]
