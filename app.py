@@ -44,6 +44,9 @@ def get_api_client():
     return MockMetalsClient()
 
 api_client = get_api_client()
+
+# Determine if using real API or demo data
+is_real_api = isinstance(api_client, MetalsLiveClient)
 db = st.session_state.db
 
 # Sidebar controls
@@ -72,6 +75,12 @@ chart_days = st.sidebar.slider(
 
 st.sidebar.divider()
 st.sidebar.info("📊 This app tracks metal prices from Metals.live and caches historical data.")
+
+# Show data source status
+if is_real_api:
+    st.sidebar.success("✅ **Live Data**: Connected to Metals.live API")
+else:
+    st.sidebar.warning("⚠️ **Demo Data**: Using fallback demo prices (API unavailable)")
 
 # Main content
 # Refresh prices if button clicked or auto-refresh enabled
