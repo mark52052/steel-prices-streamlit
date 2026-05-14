@@ -100,14 +100,22 @@ Edit `config.py` to customize:
 - **CURRENCY**: Change default currency (default: USD)
 - **PRICE_UPDATE_INTERVAL**: Auto-refresh frequency in seconds
 - **CHART_DAYS**: Default historical data range
+- **TRADING_ECONOMICS_API_KEY**: Optional API key via environment variable or Streamlit Secrets
 
-## API Data Source
+## API Data Sources
 
-This app uses the free **Metals.live API**:
-- ✅ No API key required
-- ✅ Real-time metal prices
-- ✅ Supports: Gold, Silver, Copper, Zinc, Aluminum, Nickel, etc.
-- ✅ Rate limits: Reasonable for personal use
+The app automatically uses the first working provider:
+
+1. **Trading Economics**: best coverage for Steel HRC and industrial metals. Set `TRADING_ECONOMICS_API_KEY` in Streamlit Cloud Secrets.
+2. **Yahoo Finance futures**: no API key; covers common futures such as HRC, copper, gold, silver, platinum, and palladium when symbols are available.
+3. **Metals.live**: no API key; fallback for precious metals.
+4. **Demo Data**: keeps the app usable if all external providers are unavailable.
+
+Streamlit Cloud secret example:
+
+```toml
+TRADING_ECONOMICS_API_KEY = "your_api_key_here"
+```
 
 ## Database
 

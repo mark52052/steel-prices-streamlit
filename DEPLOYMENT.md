@@ -61,6 +61,19 @@ https://steel-prices-streamlit.streamlit.app
 
 **分享這個鏈接給任何人，他們就能訪問你的應用！** 🎉
 
+### 可選：設定真實鋼價 API Key
+
+如果要啟用 Trading Economics 的 Steel HRC / 工業金屬資料：
+
+1. 到 Streamlit Cloud 應用的 **Settings → Secrets**
+2. 加入：
+
+```toml
+TRADING_ECONOMICS_API_KEY = "your_api_key_here"
+```
+
+3. 儲存後重新部署或重啟應用
+
 ---
 
 ## 📝 本地開發 (可選)

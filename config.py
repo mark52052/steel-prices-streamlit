@@ -1,11 +1,21 @@
 """Configuration for Metal Prices Streamlit App"""
 
+import os
+
 # API Configuration
 METALS_LIVE_API_URL = "https://api.metals.live/v1/spot/metals"
+TRADING_ECONOMICS_API_URL = "https://api.tradingeconomics.com/markets/commodities"
+TRADING_ECONOMICS_API_KEY = os.getenv("TRADING_ECONOMICS_API_KEY", "")
 
-# Metals to track (only metals supported by Metals.live API)
-# Metals.live 支持: gold, silver, platinum, palladium
+# Metals to track. Not every provider supports every market; clients return
+# the subset they can fetch and the UI keeps the full watchlist available.
 METALS = {
+    "Steel HRC": "steel",
+    "Iron Ore": "iron-ore",
+    "Copper": "copper",
+    "Aluminum": "aluminum",
+    "Zinc": "zinc",
+    "Nickel": "nickel",
     "Gold": "gold",
     "Silver": "silver",
     "Platinum": "platinum",

@@ -1,14 +1,19 @@
 # 金屬報價數據源指南
 
-本應用目前使用**演示數據**。以下是連接真實 API 的選項：
+本應用已支援真實 API，會依序嘗試：
+
+1. **Trading Economics**（需 API key，覆蓋 Steel、Iron Ore、Copper、Aluminum 等）
+2. **Yahoo Finance futures**（免 key，使用 `yfinance`，可抓到部分期貨）
+3. **Metals.live**（免 key，貴金屬）
+4. **Demo Data**（所有 API 不可用時）
 
 ## 📊 推薦的免費 API 源
 
 ### 1️⃣ Metals.live API（貴金屬）✅ 推薦
-**支持**: Gold, Silver, Platinum, Palladium  
-**官網**: https://metals.live  
-**API 文件**: https://metals.live/api  
-**成本**: 免費，無需 API Key  
+**支持**: Gold, Silver, Platinum, Palladium
+**官網**: https://metals.live
+**API 文件**: https://metals.live/api
+**成本**: 免費，無需 API Key
 **限制**: 貴金屬只，無工業金屬
 
 ```python
@@ -20,24 +25,29 @@ data = response.json()
 # 返回: {"gold": {"usd": 2145.50, ...}, "silver": {...}, ...}
 ```
 
-### 2️⃣ Alpha Vantage（商品期貨）
-**支持**: Steel, Copper, Natural Gas, Oil 等  
-**官網**: https://www.alphavantage.co  
-**成本**: 免費（額度有限），需要 API Key  
-**限制**: 需註冊，請求限制 5/分鐘
+### 2️⃣ Trading Economics（鋼鐵與工業金屬）✅ 推薦
+**支持**: Steel、Iron Ore、Copper、Aluminum、Zinc、Nickel、Gold、Silver 等
+**官網**: https://tradingeconomics.com
+**API 文件**: https://docs.tradingeconomics.com/markets/snapshot/
+**成本**: 需要 API Key（依方案限制）
+
+Streamlit Cloud 設定：
+
+```toml
+TRADING_ECONOMICS_API_KEY = "your_api_key_here"
+```
+
+本地測試：
 
 ```bash
-# 申請 API Key
-https://www.alphavantage.co/support/#api-key
-
-# 使用方式
-curl "https://www.alphavantage.co/query?function=WTI&apikey=YOUR_API_KEY"
+export TRADING_ECONOMICS_API_KEY="your_api_key_here"
+streamlit run app.py
 ```
 
 ### 3️⃣ Commodity API（綜合商品）
-**支持**: 油、天然氣、金屬、農產品等  
-**官網**: https://commodityapi.com  
-**成本**: 免費層（50 請求/月），付費方案  
+**支持**: 油、天然氣、金屬、農產品等
+**官網**: https://commodityapi.com
+**成本**: 免費層（50 請求/月），付費方案
 **限制**: 免費層流量較小
 
 ```python
@@ -45,8 +55,8 @@ curl "https://api.commodityapi.com/latest?base=USD&symbols=XAUUSD"
 ```
 
 ### 4️⃣ Python Package: `yfinance`（Yahoo Finance）
-**支持**: 黃金 (GC), 白銀 (SI), 原油 (CL) 等期貨  
-**成本**: 免費，無需 API Key  
+**支持**: 黃金 (GC), 白銀 (SI), 原油 (CL) 等期貨
+**成本**: 免費，無需 API Key
 **限制**: 非官方 API，可能不穩定
 
 ```python
@@ -80,7 +90,7 @@ ALPHA_VANTAGE_API_KEY = "your_api_key_here"
 class AlphaVantageClient:
     def __init__(self, api_key: str):
         self.api_key = api_key
-    
+
     def get_commodity_price(self, symbol: str):
         # symbol: 'WTI' (油), 'COPPER' (銅), 'STEEL' (鋼) 等
         url = f"https://www.alphavantage.co/query?function={symbol}&apikey={self.api_key}"
@@ -112,7 +122,7 @@ class YFinanceClient:
             'Copper': 'HG=F',
             'Steel': 'XX:US',  # Example, actual symbol varies
         }
-        
+
         prices = []
         for name, symbol in metals.items():
             try:
@@ -134,33 +144,17 @@ class YFinanceClient:
 
 ## 📌 當前應用狀態
 
-**目前使用**: 演示數據（`MockMetalsClient`）  
-**金屬**: Gold, Silver, Platinum, Palladium  
+**目前使用**: 自動資料源選擇
+**金屬**: Steel HRC, Iron Ore, Copper, Aluminum, Zinc, Nickel, Gold, Silver, Platinum, Palladium
 **更新頻率**: 手動刷新或自動（5 分鐘）
-
-### 升級到真實 API
-
-在 `app.py` 中修改：
-
-```python
-# 當前（演示）
-api_client = MockMetalsClient()
-
-# 改為真實 API
-api_client = MetalsLiveClient()  # Metals.live
-# 或
-api_client = YFinanceClient()     # Yahoo Finance
-# 或
-api_client = AlphaVantageClient(api_key="YOUR_KEY")
-```
 
 ---
 
 ## 🚀 建議步驟
 
-1. **短期方案**（現在）- 使用演示數據展示應用
-2. **中期方案**（1-2 週）- 集成 Metals.live（無 API Key）
-3. **長期方案**（1 個月）- 集成多個數據源（可靠性 + 覆蓋面）
+1. **短期方案**（現在）- 使用 Yahoo Finance + Metals.live 免 key 資料源
+2. **正式方案** - 在 Streamlit Cloud Secrets 加入 `TRADING_ECONOMICS_API_KEY`
+3. **進階方案** - 接交易所或付費授權資料源，提升 HRC steel 的穩定性與授權清晰度
 
 ---
 

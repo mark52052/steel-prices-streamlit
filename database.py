@@ -51,12 +51,12 @@ class PriceDatabase:
                 """, (item['metal'], item['price'], item.get('currency', 'USD')))
             conn.commit()
 
-    def get_latest_prices(self) -> Dict[str, float]:
+    def get_latest_prices(self) -> Dict[str, Dict]:
         """Get latest price for each metal"""
         with sqlite3.connect(self.db_file) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT metal_name, price_usd, timestamp
+                SELECT metal_name, price_usd, currency, timestamp
                 FROM prices
                 WHERE (metal_name, timestamp) IN (
                     SELECT metal_name, MAX(timestamp)
@@ -66,14 +66,17 @@ class PriceDatabase:
                 ORDER BY metal_name
             """)
             results = cursor.fetchall()
-            return {row[0]: {'price': row[1], 'timestamp': row[2]} for row in results}
+            return {
+                row[0]: {'price': row[1], 'currency': row[2], 'timestamp': row[3]}
+                for row in results
+            }
 
     def get_price_history(self, metal_name: str, days: int = 30) -> List[Dict]:
         """Get price history for a metal"""
         with sqlite3.connect(self.db_file) as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT metal_name, price_usd, timestamp
+                SELECT metal_name, price_usd, currency, timestamp
                 FROM prices
                 WHERE metal_name = ? 
                 AND timestamp >= datetime('now', '-' || ? || ' days')
@@ -81,7 +84,7 @@ class PriceDatabase:
             """, (metal_name, days))
             results = cursor.fetchall()
             return [
-                {'metal': row[0], 'price': row[1], 'timestamp': row[2]}
+                {'metal': row[0], 'price': row[1], 'currency': row[2], 'timestamp': row[3]}
                 for row in results
             ]
 
