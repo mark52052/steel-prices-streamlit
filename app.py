@@ -142,21 +142,38 @@ st.header("📈 Current Prices")
 
 latest_prices = db.get_latest_prices()
 
-if latest_prices:
+if selected_metals:
     # Create columns for price cards
     cols = st.columns(min(3, len(selected_metals)))
+    missing_metals = []
 
     for idx, metal in enumerate(selected_metals):
-        if metal in latest_prices:
-            price_info = latest_prices[metal]
-            with cols[idx % len(cols)]:
+        price_info = latest_prices.get(metal)
+        with cols[idx % len(cols)]:
+            if price_info:
                 st.metric(
                     label=metal,
                     value=format_price(price_info['price'], price_info.get('currency')),
                     delta=f"Updated: {price_info['timestamp'][-8:]}"
                 )
+            else:
+                missing_metals.append(metal)
+                st.metric(
+                    label=metal,
+                    value="No data",
+                    delta="Not returned by source"
+                )
+
+    if missing_metals and latest_prices:
+        st.caption(
+            "No latest quote yet for: "
+            + ", ".join(missing_metals)
+            + ". Try Refresh Prices, or add a Trading Economics API key for broader coverage."
+        )
+    elif not latest_prices:
+        st.info("No price data available yet. Click 'Refresh Prices' to fetch the latest data.")
 else:
-    st.info("No price data available yet. Click 'Refresh Prices' to fetch the latest data.")
+    st.warning("Please select at least one metal from the sidebar.")
 
 st.divider()
 
