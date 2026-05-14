@@ -15,7 +15,6 @@ METALS = {
     "Copper": "copper",
     "Aluminum": "aluminum",
     "Zinc": "zinc",
-    "Nickel": "nickel",
     "Gold": "gold",
     "Silver": "silver",
     "Platinum": "platinum",

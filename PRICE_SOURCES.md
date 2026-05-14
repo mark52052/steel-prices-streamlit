@@ -2,7 +2,7 @@
 
 本應用已支援真實 API，會依序嘗試：
 
-1. **Trading Economics**（需 API key，覆蓋 Steel、Iron Ore、Copper、Aluminum、Zinc、Nickel 等）
+1. **Trading Economics**（需 API key，覆蓋 Steel、Iron Ore、Copper、Aluminum、Zinc 等）
 2. **Yahoo Finance futures**（免 key，使用 `yfinance`，可抓到 Steel HRC、Iron Ore、Copper、Aluminum、Zinc 與貴金屬期貨）
 3. **Metals.live**（免 key，貴金屬）
 4. **Demo Data**（所有 API 不可用時）
@@ -26,7 +26,7 @@ data = response.json()
 ```
 
 ### 2️⃣ Trading Economics（鋼鐵與工業金屬）✅ 推薦
-**支持**: Steel、Iron Ore、Copper、Aluminum、Zinc、Nickel、Gold、Silver 等
+**支持**: Steel、Iron Ore、Copper、Aluminum、Zinc、Gold、Silver 等
 **官網**: https://tradingeconomics.com
 **API 文件**: https://docs.tradingeconomics.com/markets/snapshot/
 **成本**: 需要 API Key（依方案限制）
@@ -145,7 +145,7 @@ class YFinanceClient:
 ## 📌 當前應用狀態
 
 **目前使用**: 自動資料源選擇
-**金屬**: Steel HRC, Iron Ore, Copper, Aluminum, Zinc, Nickel, Gold, Silver, Platinum, Palladium
+**金屬**: Steel HRC, Iron Ore, Copper, Aluminum, Zinc, Gold, Silver, Platinum, Palladium
 **更新頻率**: 手動刷新或自動（5 分鐘）
 
 ---

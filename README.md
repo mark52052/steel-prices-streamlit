@@ -7,7 +7,7 @@ Real-time commodity price tracking application built with Streamlit. Track steel
 ✨ **Core Features:**
 - 📊 Real-time metal price tracking
 - 📈 Interactive Plotly charts with 30+ days of history
-- 💰 Multi-metal support (Steel, Copper, Zinc, Aluminum, Nickel, etc.)
+- 💰 Multi-metal support (Steel, Iron Ore, Copper, Zinc, Aluminum, etc.)
 - 🔄 Auto-refresh functionality
 - 📱 Responsive web interface
 - 💾 Local SQLite data persistence
