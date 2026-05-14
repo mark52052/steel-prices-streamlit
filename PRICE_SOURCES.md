@@ -2,8 +2,8 @@
 
 本應用已支援真實 API，會依序嘗試：
 
-1. **Trading Economics**（需 API key，覆蓋 Steel、Iron Ore、Copper、Aluminum 等）
-2. **Yahoo Finance futures**（免 key，使用 `yfinance`，可抓到部分期貨）
+1. **Trading Economics**（需 API key，覆蓋 Steel、Iron Ore、Copper、Aluminum、Zinc、Nickel 等）
+2. **Yahoo Finance futures**（免 key，使用 `yfinance`，可抓到 Steel HRC、Iron Ore、Copper、Aluminum、Zinc 與貴金屬期貨）
 3. **Metals.live**（免 key，貴金屬）
 4. **Demo Data**（所有 API 不可用時）
 

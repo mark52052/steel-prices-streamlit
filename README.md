@@ -107,7 +107,7 @@ Edit `config.py` to customize:
 The app automatically uses the first working provider:
 
 1. **Trading Economics**: best coverage for Steel HRC and industrial metals. Set `TRADING_ECONOMICS_API_KEY` in Streamlit Cloud Secrets.
-2. **Yahoo Finance futures**: no API key; covers common futures such as HRC, copper, gold, silver, platinum, and palladium when symbols are available.
+2. **Yahoo Finance futures**: no API key; covers common futures such as HRC, iron ore, zinc, copper, gold, silver, platinum, and palladium when symbols are available.
 3. **Metals.live**: no API key; fallback for precious metals.
 4. **Demo Data**: keeps the app usable if all external providers are unavailable.
 

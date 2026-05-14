@@ -100,8 +100,10 @@ class YFinanceClient:
     # Futures ticker symbols for metals
     METAL_SYMBOLS = {
         'Steel HRC': 'HRC=F',    # CME US Midwest HRC Steel futures
+        'Iron Ore': 'TIO=F',     # SGX TSI Iron Ore futures
         'Copper': 'HG=F',        # COMEX Copper futures
         'Aluminum': 'ALI=F',     # CME Aluminum futures
+        'Zinc': 'ZNC=F',         # COMEX Zinc futures
         'Gold': 'GC=F',          # COMEX Gold futures
         'Silver': 'SI=F',        # COMEX Silver futures
         'Platinum': 'PL=F',      # NYMEX Platinum futures
