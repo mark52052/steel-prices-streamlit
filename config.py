@@ -3,14 +3,13 @@
 # API Configuration
 METALS_LIVE_API_URL = "https://api.metals.live/v1/spot/metals"
 
-# Metals to track
+# Metals to track (only metals supported by Metals.live API)
+# Metals.live 支持: gold, silver, platinum, palladium
 METALS = {
-    "Steel (HRC)": "steel",
-    "Copper": "copper",
-    "Zinc": "zinc",
-    "Aluminum": "aluminum",
-    "Nickel": "nickel",
-    "Iron Ore": "iron_ore",
+    "Gold": "gold",
+    "Silver": "silver",
+    "Platinum": "platinum",
+    "Palladium": "palladium",
 }
 
 # Display settings
